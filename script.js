@@ -23,3 +23,24 @@ pokemonArray.forEach(pokemon => {
 
 
 /////////////////////Extension////////////////
+const body = document.querySelector("body");
+const inputBox = document.querySelector("h1");
+
+inputBox.innerHTML += `
+    <div>
+        <label for="pokemonName">Catch Pokèmon: </label>
+        <input id="pokemonName" type="text">
+    </div>`;
+
+//search pokemon by name
+const pokemonName = document.querySelector("#pokemonName");
+
+const nameSearch = (event) => {
+    container.innerHTML = "";
+    pokemonArray.forEach(pokemon => {
+        if (pokemon.name.includes(event.target.value.toLowerCase())) {
+            container.innerHTML += cardDisplay(pokemon);
+        }
+    })
+}
+pokemonName.addEventListener("input", nameSearch);
