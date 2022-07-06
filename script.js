@@ -23,13 +23,16 @@ pokemonArray.forEach(pokemon => {
 
 
 /////////////////////Extension////////////////
-const body = document.querySelector("body");
 const inputBox = document.querySelector("h1");
 
 inputBox.innerHTML += `
     <div>
-        <label for="pokemonName">Catch Pokèmon: </label>
+        <label for="pokemonName">Catch Pokèmon Name: </label>
         <input id="pokemonName" type="text">
+    </div>
+    <div>
+        <label for="pokemonType">Catch Pokèmon Type: </label>
+        <input id="pokemonType" type="text">
     </div>`;
 
 //search pokemon by name
@@ -44,3 +47,29 @@ const nameSearch = (event) => {
     })
 }
 pokemonName.addEventListener("input", nameSearch);
+
+const reset = (event) => {
+    container.innerHTML = "";
+    pokemonArray.forEach(pokemon => {
+        container.innerHTML += cardDisplay(pokemon)
+    });
+}
+
+//search pokemon by type
+const pokemonType = document.querySelector("#pokemonType");
+
+const typeSearch = (event) => {
+    container.innerHTML = "";
+    pokemonArray.forEach(pokemon => {
+        for (let i = 0; i < pokemon.types.length; i++) {
+            if (pokemon.types[i].includes(event.target.value.toLowerCase())) {
+                container.innerHTML += cardDisplay(pokemon);
+            }
+        }
+    })
+    //when clear typeSearch, pokemon with more than one type will show more than once:
+    if (event.target.value == "") {
+        reset();
+    }
+}
+pokemonType.addEventListener("input", typeSearch)
