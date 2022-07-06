@@ -29,10 +29,6 @@ inputBox.innerHTML += `
     <div>
         <label for="pokemonName">Catch Pokèmon Name: </label>
         <input id="pokemonName" type="text">
-    </div>
-    <div>
-        <label for="pokemonType">Catch Pokèmon Type: </label>
-        <input id="pokemonType" type="text">
     </div>`;
 
 //search pokemon by name
@@ -48,16 +44,23 @@ const nameSearch = (event) => {
 }
 pokemonName.addEventListener("input", nameSearch);
 
+
+
+//search pokemon by type
+inputBox.innerHTML += `
+    <div>
+        <label for="pokemonType">Catch Pokèmon Type: </label>
+        <input id="pokemonType" type="text">
+    </div>`;
+
+const pokemonType = document.querySelector("#pokemonType");
+
 const reset = (event) => {
     container.innerHTML = "";
     pokemonArray.forEach(pokemon => {
         container.innerHTML += cardDisplay(pokemon)
     });
 }
-
-//search pokemon by type
-const pokemonType = document.querySelector("#pokemonType");
-
 const typeSearch = (event) => {
     container.innerHTML = "";
     pokemonArray.forEach(pokemon => {
@@ -73,3 +76,26 @@ const typeSearch = (event) => {
     }
 }
 pokemonType.addEventListener("input", typeSearch)
+
+
+
+//change the number of result
+inputBox.innerHTML += `
+    <div>
+        <label for="pokemonNumber">Catch Pokèmon Number: </label>
+        <input id="pokemonNumber" type="text">
+    </div>`;
+
+const pokemonNumber = document.querySelector("#pokemonNumber");
+
+const numberResult = (event) => {
+    container.innerHTML = "";
+    if (0 < event.target.value <= 151) {
+        for (let i = 0; i < event.target.value; i++) {
+            container.innerHTML += cardDisplay(pokemonArray[i]);
+        }
+    } else {
+        reset();
+    }
+}
+pokemonNumber.addEventListener("input", numberResult)
